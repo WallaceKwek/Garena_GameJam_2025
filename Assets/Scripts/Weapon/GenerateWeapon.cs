@@ -21,15 +21,24 @@ public class GenerateWeapon : MonoBehaviour
     void Start() {
         addPanel();
     }
+
+    void Update(){
+        if(GameManager.inst.gpManager.enemiesKilled % 20 == 0)
+        {
+            addPanel();
+            GameManager.inst.gpManager.enemiesKilled += 1;
+        }
+    }
     public void removePanel() {
         panel.SetActive(false);
         panel2.SetActive(true);
-        Time.timeScale = 1.0f;
+        Time.timeScale = 0.1f;
         StartCoroutine(timeGo());
     }
 
     IEnumerator timeGo() {
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(0.4f);
+        Time.timeScale = 1.0f;
         panel2.SetActive(false);
     }
 
@@ -44,6 +53,9 @@ public class GenerateWeapon : MonoBehaviour
 
     private void createWeapon(int damage, int distance, int weight, float rate, string weaponType, int projectileSpd) {
         GameObject projectileSpawned = sprites[getSprite(weaponType)];
+        for (int i = 0; i < icons.Count; i++) {
+            icons[i].SetActive(false);
+        }
         icons[getIcon(weaponType)].SetActive(true);
         Weapon weapon = ScriptableObject.CreateInstance<Weapon>();
         weapon.Initialize(damage, distance, weight, rate, projectileSpawned, projectileSpd);
@@ -51,6 +63,22 @@ public class GenerateWeapon : MonoBehaviour
         WeaponScript weaponScript = weaponOwner.GetComponent<WeaponScript>();
         weaponScript.weapon = weapon;
     } 
+
+    private void createEffect(string buffType, float percentage_change) {
+        switch (buffType) 
+        {
+            case "max_HP":
+                GameManager.inst.gpManager.player.GetComponent<HealthComponent>().maxHealth += (int)((percentage_change / 100.0f) * GameManager.inst.gpManager.player.GetComponent<HealthComponent>().maxHealth);
+                break;
+            case "cur_HP":
+                GameManager.inst.gpManager.player.GetComponent<HealthComponent>().currentHealth += (int)((percentage_change / 100.0f) * GameManager.inst.gpManager.player.GetComponent<HealthComponent>().maxHealth);
+                break;
+            case "dmg":
+                WeaponScript weaponScript = weaponOwner.GetComponent<WeaponScript>();
+                weaponScript.weapon.damage *= (int)((100 + percentage_change) / 100);
+                break;
+        }
+    }
 
     private int getSprite(string weaponType) 
     {
@@ -124,7 +152,12 @@ public class GenerateWeapon : MonoBehaviour
                 weaponName.text = temp.name;
                 weaponName2.text = temp.name;
                 description.text = temp.reply;
-                createWeapon(temp.dmg,temp.atkrange,temp.weight,temp.rate,temp.gracetype, temp.projspeed);
+                if (temp.gracetype == "effect") {
+                    createEffect(temp.changed_stat, temp.percentage_change);
+                }
+                else {
+                    createWeapon(temp.dmg,temp.atkrange,temp.weight,temp.rate,temp.gracetype, temp.projspeed);
+                }
                 removePanel();
             }
         }

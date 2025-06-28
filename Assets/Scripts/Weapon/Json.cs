@@ -8,6 +8,7 @@ public class Json
     public int atkrange;
     public float rate;
     public string gracetype;
+    public string changed_stat;
     public int weight;
     public int projspeed = 30;
     public float percentage_change;

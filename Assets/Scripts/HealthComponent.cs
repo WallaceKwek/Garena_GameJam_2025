@@ -23,6 +23,7 @@ public class HealthComponent : MonoBehaviour
 
             // increase the amount of kills
             GameManager.inst.gpManager.enemiesKilled += 1;
+            Debug.Log(GameManager.inst.gpManager.enemiesKilled);
         }
 
         // Clamp the health to be between 0 and the max health
