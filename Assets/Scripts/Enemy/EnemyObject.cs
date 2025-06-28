@@ -11,7 +11,7 @@ public class EnemyObject : MonoBehaviour
 
     public float moveSpeed;
 
-    public float attackRate = 1000000.0f;
+    public float attackRate = 3.0f;
     private float attackTimer = 0.0f; // this acts as a bounce time for the enemy's attack
 
     
@@ -31,6 +31,15 @@ public class EnemyObject : MonoBehaviour
         rb.linearVelocity = destination * moveSpeed;
 
         attackTimer += Time.deltaTime;
+
+        if(destination.x > 0)
+        {
+            sr.flipX = false;
+        }
+        else
+        {
+            sr.flipX = true;
+        }
     }
 
     // When enemy collides with player, ensure that there is a cooldown on the attack so that the player doesnt get killed instantly in 1 second

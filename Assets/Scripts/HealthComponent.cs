@@ -20,6 +20,9 @@ public class HealthComponent : MonoBehaviour
             // Coroutine so that the effects above can finishing playing before we disable this gameobject, to add below, this is only applied to enemyobjects
             //StartCoroutine(Kill());
             gameObject.SetActive(false);
+
+            // increase the amount of kills
+            GameManager.inst.gpManager.enemiesKilled += 1;
         }
 
         // Clamp the health to be between 0 and the max health
