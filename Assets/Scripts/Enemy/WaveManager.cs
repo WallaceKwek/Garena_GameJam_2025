@@ -16,6 +16,7 @@ public class WaveManager : MonoBehaviour
     public List<SpawnPoint> spawnPoints; // contains all possible spawn locations
     private List<float> spawnDistFromPlayer;
 
+    public int baseHealth = 20;
     private float spawnBounceTime = 0.0f;
     private ScalingManager sm;
 
@@ -45,7 +46,7 @@ public class WaveManager : MonoBehaviour
             {
                 SpawnPoint temp = ChooseSpawnPoint();
 
-                temp.SpawnEnemy((int)(sm.enemyCount * sm.enemyCountMultiplier), 10.0f * sm.hpIncreaseMultiplier);
+                temp.SpawnEnemy((int)(sm.enemyCount * sm.enemyCountMultiplier), baseHealth * sm.hpIncreaseMultiplier);
             }
 
             spawnBounceTime = sm.waveFrequency;

@@ -8,5 +8,5 @@ public class Json
     public float rate;
     public string gracetype;
     public int weight;
-    public int projspeed = 100;
+    public int projspeed = 30;
 }

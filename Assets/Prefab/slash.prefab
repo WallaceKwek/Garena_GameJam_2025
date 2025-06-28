@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25803ded2d29f347a9932c37aeb7b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Projectile: {fileID: 0}
+  projectile: {fileID: 0}
   initialLocation: {x: 0, y: 0, z: 0}
 --- !u!61 &5668804276098832504
 BoxCollider2D:
@@ -176,4 +176,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4

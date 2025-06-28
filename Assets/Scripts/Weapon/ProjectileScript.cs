@@ -29,6 +29,7 @@ public class ProjectileScript : MonoBehaviour
             // deal damage to the enemy
             HealthComponent hpcomponent = collision.gameObject.GetComponent<HealthComponent>();
             hpcomponent.currentHealth -= projectile.damage;
+            Destroy(gameObject);
         }
     }
 }

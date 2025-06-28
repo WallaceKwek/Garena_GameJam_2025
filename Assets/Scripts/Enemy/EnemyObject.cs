@@ -11,7 +11,7 @@ public class EnemyObject : MonoBehaviour
 
     public float moveSpeed;
 
-    public float attackRate = 1.0f;
+    public float attackRate = 1000000.0f;
     private float attackTimer = 0.0f; // this acts as a bounce time for the enemy's attack
 
     
@@ -45,7 +45,7 @@ public class EnemyObject : MonoBehaviour
     private void OnCollisionStay2D(Collision2D collision)
     {
 
-       if(attackTimer >= attackRate)
+       if(attackTimer >= attackRate && collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             attackTimer = 0.0f;
 

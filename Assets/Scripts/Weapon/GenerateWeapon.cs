@@ -104,7 +104,7 @@ public class GenerateWeapon : MonoBehaviour
                 var text = request.downloadHandler.text;
                 Debug.Log(text);
                 Json temp = JsonUtility.FromJson<Json>(text);
-                createWeapon(temp.dmg,temp.atkrange,temp.weight,0.5f,temp.gracetype, 10);
+                createWeapon(temp.dmg,temp.atkrange*1000,temp.weight,temp.rate,temp.gracetype, temp.projspeed);
                 removePanel();
             }
         }
