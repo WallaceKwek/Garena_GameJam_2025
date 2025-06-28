@@ -11,8 +11,10 @@ public class EnemyObject : MonoBehaviour
 
     public float moveSpeed;
 
-    public float attackRate = 1000000.0f;
+    public float attackRate = 1.5f;
     private float attackTimer = 0.0f; // this acts as a bounce time for the enemy's attack
+
+    
 
     
 

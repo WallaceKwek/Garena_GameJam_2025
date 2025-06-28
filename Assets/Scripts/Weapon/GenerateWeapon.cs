@@ -11,14 +11,31 @@ public class GenerateWeapon : MonoBehaviour
     public List<GameObject> sprites;
     public List<GameObject> icons;
     public GameObject panel;
+    public TMP_Text weaponName;
+    public GameObject panel2;
+    public TMP_Text weaponName2;
+    public TMP_Text description;
 
     string url = "https://pantheon-98al.onrender.com/get-grace";
 
-    // void Start() {
-    //     generateWeapon();
-    // }
+    void Start() {
+        addPanel();
+    }
     public void removePanel() {
         panel.SetActive(false);
+        panel2.SetActive(true);
+        Time.timeScale = 1.0f;
+        StartCoroutine(timeGo());
+    }
+
+    IEnumerator timeGo() {
+        yield return new WaitForSeconds(4);
+        panel2.SetActive(false);
+    }
+
+    public void addPanel() {
+        panel.SetActive(true);
+        Time.timeScale = 0.0f;
     }
 
     public void generateWeapon() {
@@ -104,7 +121,10 @@ public class GenerateWeapon : MonoBehaviour
                 var text = request.downloadHandler.text;
                 Debug.Log(text);
                 Json temp = JsonUtility.FromJson<Json>(text);
-                createWeapon(temp.dmg,temp.atkrange*1000,temp.weight,temp.rate,temp.gracetype, temp.projspeed);
+                weaponName.text = temp.name;
+                weaponName2.text = temp.name;
+                description.text = temp.reply;
+                createWeapon(temp.dmg,temp.atkrange,temp.weight,temp.rate,temp.gracetype, temp.projspeed);
                 removePanel();
             }
         }

@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
         {
             facing = moveDirection;
         }
-        if (Input.GetKeyDown("q"))
+        if (Input.GetKeyDown("space"))
         {
             ws.Attack(facing);
         }

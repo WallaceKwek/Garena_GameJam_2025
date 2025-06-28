@@ -13,6 +13,9 @@ public class WeaponScript : MonoBehaviour
 
     public void Attack(Vector2 direction)
     {
+        if (weapon == null) {
+            return;
+        }
         if (time > 0) {
             return;
         }

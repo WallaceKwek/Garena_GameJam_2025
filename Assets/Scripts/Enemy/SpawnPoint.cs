@@ -33,6 +33,7 @@ public class SpawnPoint : MonoBehaviour
             // TO ADD enemy hp stats depending on type of enemy
             HealthComponent hpComponent = tempEnemyObj.GetComponent<HealthComponent>();
             hpComponent.maxHealth = (int)health;
+            hpComponent.currentHealth = hpComponent.maxHealth;
 
             // TO ADD change sprite depending on type of enemy
             SpriteRenderer srComponent = tempEnemyObj.GetComponent<SpriteRenderer>();
