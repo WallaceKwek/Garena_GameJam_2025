@@ -16,10 +16,37 @@ public class GenerateWeapon : MonoBehaviour
     public TMP_Text weaponName2;
     public TMP_Text description;
     public SubmitButton SubmitButtonScript;
+    public TMP_Text godCommand;
+    private int curGod;
+    private bool start;
+    private List<string> godNames = new List<string>
+    { 
+        "medusa",
+        "chronos",
+        "azatoth",
+        "bodhisattva",
+        "hephaestus",
+        "ghost of painter",
+        "euterpe",
+        "loki"
+    };
+    private List<string> godInstructions = new List<string>
+    {
+        "medusa: your words must start or end with s",
+        "chronos: do not waste my time",
+        "azatoth: pyte ni angraams lyon",
+        "bodhisattva: do not wish for something harmful",
+        "hephaestus: i can only build medieval things",
+        "ghost of painter: i will only build modern things",
+        "euterpe: your words must have the same syllables",
+        "loki: ???"
+    };
 
     string url = "https://pantheon-98al.onrender.com/get-grace";
 
     void Start() {
+        curGod = 4;
+        start = true;
         addPanel();
     }
 
@@ -31,6 +58,7 @@ public class GenerateWeapon : MonoBehaviour
         }
     }
     public void removePanel() {
+        tablet.text = "";
         panel.SetActive(false);
         panel2.SetActive(true);
         Time.timeScale = 0.1f;
@@ -44,6 +72,12 @@ public class GenerateWeapon : MonoBehaviour
     }
 
     public void addPanel() {
+        if (!start)
+        {
+            curGod = Random.Range(0, godNames.Count - 1);
+        }
+        start = false;
+        godCommand.text = godInstructions[curGod];
         panel.SetActive(true);
         SubmitButtonScript.TurnOnButton();
         Time.timeScale = 0.0f;
@@ -67,6 +101,7 @@ public class GenerateWeapon : MonoBehaviour
     } 
 
     private void createEffect(string buffType, float percentage_change) {
+        WeaponScript weaponScript = weaponOwner.GetComponent<WeaponScript>();
         switch (buffType) 
         {
             case "max_HP":
@@ -79,8 +114,13 @@ public class GenerateWeapon : MonoBehaviour
                 }
                 break;
             case "dmg":
-                WeaponScript weaponScript = weaponOwner.GetComponent<WeaponScript>();
                 weaponScript.weapon.damage *= (int)((100 + percentage_change) / 100);
+                break;
+            case "rate":
+                weaponScript.weapon.rate *= (int)((100 - percentage_change) / 100);
+                break;
+            case "atkrange":
+                weaponScript.weapon.distance *= (int)((100 + percentage_change) / 100);
                 break;
         }
     }
