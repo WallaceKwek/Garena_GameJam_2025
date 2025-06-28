@@ -25,6 +25,6 @@ public class WeaponScript : MonoBehaviour
         ProjectileScript projectileScript = newProjectile.GetComponent<ProjectileScript>();
         projectile = ScriptableObject.CreateInstance<Projectile>();
         projectile.Initialize(weapon.damage, weapon.distance, direction, weapon.projectileSpd);
-        projectileScript.Projectile = projectile;
+        projectileScript.projectile = projectile;
     }
 }
