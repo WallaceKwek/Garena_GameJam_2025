@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameplayManager : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class GameplayManager : MonoBehaviour
     [HideInInspector]
     public ScalingManager scalingManager;
 
+    public int enemiesKilled = 1;
+
+    public Slider hpBar;
+    private HealthComponent playerhp;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -30,11 +35,17 @@ public class GameplayManager : MonoBehaviour
 
         enemyObjectPool.Init();
         waveManager.Init();
+
+        playerhp = player.GetComponent<HealthComponent>();
+        hpBar.maxValue = playerhp.maxHealth;
+        hpBar.value = playerhp.maxHealth;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        hpBar.value = playerhp.currentHealth;
     }
+
 }

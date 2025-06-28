@@ -33,6 +33,15 @@ public class EnemyObject : MonoBehaviour
         rb.linearVelocity = destination * moveSpeed;
 
         attackTimer += Time.deltaTime;
+
+        if(destination.x > 0)
+        {
+            sr.flipX = false;
+        }
+        else
+        {
+            sr.flipX = true;
+        }
     }
 
     // When enemy collides with player, ensure that there is a cooldown on the attack so that the player doesnt get killed instantly in 1 second
