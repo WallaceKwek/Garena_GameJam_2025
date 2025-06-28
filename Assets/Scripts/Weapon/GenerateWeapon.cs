@@ -15,6 +15,7 @@ public class GenerateWeapon : MonoBehaviour
     public GameObject panel2;
     public TMP_Text weaponName2;
     public TMP_Text description;
+    public SubmitButton SubmitButtonScript;
 
     string url = "https://pantheon-98al.onrender.com/get-grace";
 
@@ -44,6 +45,7 @@ public class GenerateWeapon : MonoBehaviour
 
     public void addPanel() {
         panel.SetActive(true);
+        SubmitButtonScript.TurnOnButton();
         Time.timeScale = 0.0f;
     }
 
@@ -72,6 +74,9 @@ public class GenerateWeapon : MonoBehaviour
                 break;
             case "cur_HP":
                 GameManager.inst.gpManager.player.GetComponent<HealthComponent>().currentHealth += (int)((percentage_change / 100.0f) * GameManager.inst.gpManager.player.GetComponent<HealthComponent>().maxHealth);
+                if (GameManager.inst.gpManager.player.GetComponent<HealthComponent>().currentHealth > GameManager.inst.gpManager.player.GetComponent<HealthComponent>().maxHealth) {
+                    GameManager.inst.gpManager.player.GetComponent<HealthComponent>().currentHealth = GameManager.inst.gpManager.player.GetComponent<HealthComponent>().maxHealth;
+                }
                 break;
             case "dmg":
                 WeaponScript weaponScript = weaponOwner.GetComponent<WeaponScript>();
@@ -149,13 +154,13 @@ public class GenerateWeapon : MonoBehaviour
                 var text = request.downloadHandler.text;
                 Debug.Log(text);
                 Json temp = JsonUtility.FromJson<Json>(text);
-                weaponName.text = temp.name;
                 weaponName2.text = temp.name;
                 description.text = temp.reply;
                 if (temp.gracetype == "effect") {
                     createEffect(temp.changed_stat, temp.percentage_change);
                 }
                 else {
+                    weaponName.text = temp.name;
                     createWeapon(temp.dmg,temp.atkrange,temp.weight,temp.rate,temp.gracetype, temp.projspeed);
                 }
                 removePanel();

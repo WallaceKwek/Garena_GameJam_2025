@@ -31,5 +31,8 @@ public class ProjectileScript : MonoBehaviour
             hpcomponent.currentHealth -= projectile.damage;
             Destroy(gameObject);
         }
+        else if (collision.gameObject.layer != LayerMask.NameToLayer("Player")) {
+            Destroy(gameObject);
+        }
     }
 }

@@ -6,4 +6,9 @@ public class SubmitButton : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+
+    public void TurnOnButton()
+    {
+        gameObject.SetActive(true);
+    }
 }
