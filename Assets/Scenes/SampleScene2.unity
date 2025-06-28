@@ -29090,6 +29090,7 @@ MonoBehaviour:
   panel2: {fileID: 1354154527}
   weaponName2: {fileID: 1480145761}
   description: {fileID: 2104752411}
+  SubmitButtonScript: {fileID: 1480150403}
 --- !u!114 &1254416774
 MonoBehaviour:
   m_ObjectHideFlags: 0
