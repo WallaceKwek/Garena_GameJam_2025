@@ -17,10 +17,14 @@ public class WeaponScript : MonoBehaviour
             return;
         }
         time = weapon.rate;
-        GameObject newProjectile = Instantiate(weapon.projectileSpawned, transform.position, Quaternion.identity);
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
+
+        GameObject newProjectile = Instantiate(weapon.projectileSpawned, transform.position, rotation);
         ProjectileScript projectileScript = newProjectile.GetComponent<ProjectileScript>();
         projectile = ScriptableObject.CreateInstance<Projectile>();
-        projectile.Initialize(weapon.damage, weapon.distance, direction);
+        projectile.Initialize(weapon.damage, weapon.distance, direction, weapon.projectileSpd);
         projectileScript.Projectile = projectile;
     }
 }

@@ -4697,18 +4697,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1996536437}
-        m_TargetAssemblyTypeName: GenerateWeapon, Assembly-CSharp
-        m_MethodName: removePanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1480150401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5060,6 +5048,8 @@ MonoBehaviour:
   tablet: {fileID: 1166262005}
   weaponOwner: {fileID: 1277395300}
   sprites:
+  - {fileID: 7529794989616515787, guid: 10f0bca34c37546e98b3b668595bb796, type: 3}
+  - {fileID: 7529794989616515787, guid: 216869d25a67547bbbd7811e07174c51, type: 3}
   - {fileID: 7529794989616515787, guid: 251b87a6865599e42b535a9f18d6c920, type: 3}
   panel: {fileID: 2002863209}
 --- !u!4 &1996536438

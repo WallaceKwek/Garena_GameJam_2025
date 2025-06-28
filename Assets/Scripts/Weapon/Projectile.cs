@@ -8,10 +8,11 @@ public class Projectile : ScriptableObject
     public Vector2 movement = new Vector2();
     public int speed = 30;
 
-    public void Initialize(int initDamge, int initDistance, Vector2 initMovement)
+    public void Initialize(int initDamge, int initDistance, Vector2 initMovement, int spd)
     {
         damage = initDamge;
         distance = initDistance;
         movement = initMovement;
+        speed = spd;
     }
 }
