@@ -25,10 +25,6 @@ public class PlayerCamera : MonoBehaviour
         
     }
 
-    void FixedUpdate()
-    {
-       
-    }
 
     private void FixedUpdate()
     {
