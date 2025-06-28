@@ -2,21 +2,27 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Networking;
+using TMPro;
 
 public class GenerateWeapon : MonoBehaviour
 {
+    public TMP_InputField tablet;
     public GameObject weaponOwner;
     public List<GameObject> sprites;
+    public GameObject panel;
 
     string url = "http://127.0.0.1:8000/ping";
 
-    void Start() {
-        generateWeapon();
+    // void Start() {
+    //     generateWeapon();
+    // }
+    public void removePanel() {
+        panel.SetActive(false);
     }
 
     public void generateWeapon() {
         UnityWebRequest request = UnityWebRequest.Get(url);
-        StartCoroutine(getRequest(url));
+        StartCoroutine(getRequest(url, tablet.text));
     }
 
     private void createWeapon(int damage, int distance, int weight, float rate, string weaponType) {
@@ -28,7 +34,7 @@ public class GenerateWeapon : MonoBehaviour
         weaponScript.weapon = weapon;
     } 
 
-    private IEnumerator getRequest(string url) 
+    private IEnumerator getRequest(string url, string wish) 
     {
         using (UnityWebRequest request = UnityWebRequest.Get(url))
         {
