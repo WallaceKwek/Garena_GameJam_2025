@@ -11,7 +11,7 @@ public class EnemyObject : MonoBehaviour
 
     public float moveSpeed;
 
-    public float attackRate = 0.25f;
+    public float attackRate = 1.0f;
     private float attackTimer = 0.0f; // this acts as a bounce time for the enemy's attack
 
     
@@ -29,10 +29,12 @@ public class EnemyObject : MonoBehaviour
         //destination = new Vector2(GameManager.inst.gpManager.player.transform.localPosition.x, GameManager.inst.gpManager.player.transform.localPosition.y);
         destination = (GameManager.inst.gpManager.player.transform.position - transform.position).normalized;
         rb.linearVelocity = destination * moveSpeed;
+
+        attackTimer += Time.deltaTime;
     }
 
     // When enemy collides with player, ensure that there is a cooldown on the attack so that the player doesnt get killed instantly in 1 second
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
@@ -40,8 +42,9 @@ public class EnemyObject : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
+
        if(attackTimer >= attackRate)
         {
             attackTimer = 0.0f;
