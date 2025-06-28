@@ -25,7 +25,7 @@ public class PlayerCamera : MonoBehaviour
         
     }
 
-    private void LateUpdate()
+    void FixedUpdate()
     {
        
     }
