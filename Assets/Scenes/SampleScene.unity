@@ -534,7 +534,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 814494455}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61d887455964b50419c6f18f91507153, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b6bfb3b97b34e84e9df8f6f34a094d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   projectileSpawned: {fileID: 7529794989616515787, guid: 251b87a6865599e42b535a9f18d6c920, type: 3}

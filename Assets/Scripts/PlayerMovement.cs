@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     private Vector2 moveDirection;
+    private Vector2 facing;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,6 +20,15 @@ public class PlayerMovement : MonoBehaviour
         moveDirection.x = Input.GetAxisRaw("Horizontal");
         moveDirection.y = Input.GetAxisRaw("Vertical");
         moveDirection.Normalize();
+        if (moveDirection.magnitude > 0)
+        {
+            facing = moveDirection;
+        }
+        if (Input.GetKeyDown("q"))
+        {
+            WeaponScript weaponScript = this.gameObject.GetComponent<WeaponScript>();
+            weaponScript.Attack(facing);
+        }
 
     }
 
