@@ -7,11 +7,14 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 moveDirection;
     private Vector2 facing;
+    private WeaponScript ws;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        ws = GetComponent<WeaponScript>();
+        facing = Vector2.right;
     }
 
     // Update is called once per frame
@@ -26,8 +29,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetKeyDown("q"))
         {
-            WeaponScript weaponScript = this.gameObject.GetComponent<WeaponScript>();
-            weaponScript.Attack(facing);
+            ws.Attack(facing);
         }
 
     }
