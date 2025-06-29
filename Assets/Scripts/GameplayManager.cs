@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameplayManager : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class GameplayManager : MonoBehaviour
 
     public Slider hpBar;
     private HealthComponent playerhp;
+    public TextMeshProUGUI hptext;
+
+    public GameObject gameoverscreen;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -46,6 +50,17 @@ public class GameplayManager : MonoBehaviour
     void Update()
     {
         hpBar.value = playerhp.currentHealth;
+        hpBar.maxValue = playerhp.maxHealth;
+        hptext.text = "HP: " + playerhp.currentHealth + " / " + playerhp.maxHealth;
+
+        if(playerhp.currentHealth <= 0)
+        {
+            gameoverscreen.SetActive(true);
+        }
+    }
+
+    public void quitGame() {
+        Application.Quit();
     }
 
 }

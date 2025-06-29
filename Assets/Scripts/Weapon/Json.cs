@@ -12,4 +12,5 @@ public class Json
     public int weight;
     public int projspeed = 30;
     public float percentage_change;
+    public string item_description;
 }

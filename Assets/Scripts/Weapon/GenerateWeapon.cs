@@ -17,6 +17,7 @@ public class GenerateWeapon : MonoBehaviour
     public TMP_Text description;
     public SubmitButton SubmitButtonScript;
     public TMP_Text godCommand;
+    public TMP_Text weaponStats;
     private int curGod;
     private bool start;
     private List<string> godNames = new List<string>
@@ -32,29 +33,33 @@ public class GenerateWeapon : MonoBehaviour
     };
     private List<string> godInstructions = new List<string>
     {
-        "medusa: your words must start or end with s",
-        "chronos: do not waste my time",
+        "medusa: Ssslither sssentences succinctly... wordss ssshould slither sstarts & endss",
+        "chronos: 3 words, no more. Don't waste my time",
         "azatoth: pyte ni angraams lyon",
-        "bodhisattva: do not wish for something harmful",
-        "hephaestus: i can only build medieval things",
-        "ghost of painter: i will only build modern things",
-        "euterpe: your words must have the same syllables",
+        "bodhisattva: Peace begins with intent. Wish not for harm, but for harmony, young seeker.",
+        "hephaestus: I am the forge. Ask only for creations of the old world — medieval, timeless, worthy of myth.",
+        "ghost of painter: You vill ask only for modern veapons. Do not disgrace mein vision with primitive junk.",
+        "euterpe: Let your words sing — growing longer, one after another~ Build a melody in length~",
         "loki: ???"
     };
 
-    string url = "https://pantheon-98al.onrender.com/get-grace";
+    string url = "https://pantheon-98al.onrender.com/get-god-grace";
 
     void Start() {
         curGod = 4;
         start = true;
         addPanel();
     }
-
     void Update(){
-        if(GameManager.inst.gpManager.enemiesKilled % 20 == 0)
+        WeaponScript weaponScript = weaponOwner.GetComponent<WeaponScript>();
+        if (weaponScript.weapon != null) {
+            Weapon weapon = weaponScript.weapon;
+            weaponStats.text = "atk: " + weapon.damage + "\nrange: " + weapon.distance + "\nrate: " + weapon.rate;
+        }
+        if(GameManager.inst.gpManager.enemiesKilled >= 20)
         {
             addPanel();
-            GameManager.inst.gpManager.enemiesKilled += 1;
+            GameManager.inst.gpManager.enemiesKilled -= 20;
         }
     }
     public void removePanel() {
@@ -181,7 +186,7 @@ public class GenerateWeapon : MonoBehaviour
 
     private IEnumerator getRequest(string url, string wish) 
     {
-        using (UnityWebRequest request = UnityWebRequest.Post(url, "{ \"message\": \"" + wish + "\" }", "application/json"))
+        using (UnityWebRequest request = UnityWebRequest.Post(url, "{ \"message\": \"" + wish + "\", \"god_name\": \"" + godNames[curGod] + "\" }", "application/json"))
         {
             request.SetRequestHeader("api-key", "default");
             yield return request.SendWebRequest();
@@ -195,7 +200,7 @@ public class GenerateWeapon : MonoBehaviour
                 Debug.Log(text);
                 Json temp = JsonUtility.FromJson<Json>(text);
                 weaponName2.text = temp.name;
-                description.text = temp.reply;
+                description.text = temp.item_description;
                 if (temp.gracetype == "effect") {
                     createEffect(temp.changed_stat, temp.percentage_change);
                 }
